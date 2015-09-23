@@ -1,6 +1,19 @@
 'use strict';
 const ipc = require('ipc');
+const path = require('path');
 const remote = require('remote');
+
+function relative() {
+  let args;
+  if (Array.isArray(arguments[0])) {
+    args = arguments[0];
+  } else {
+    args = Array.from(arguments);
+  }
+  args.unshift(__dirname, '..');
+  console.log(path.resolve.apply(path, args));
+  return path.resolve.apply(path, args);
+}
 
 function loadNextPage(count){
   if (typeof count !== 'number') {
@@ -32,11 +45,14 @@ ipc.on('favorite', function () {
   let notification;
   let args;
   let meta;
+  function icon(path) {
+    return `file://${path}`;
+  }
   meta = getTrackMetaThunk(displayList)(currentTrack);
   if (meta.favStatus) {
-    args = ['./1f494.png', 'Unfavorited on Hype Machine'];
+    args = [icon(relative('assets', 'brokenheart.png')), 'Unfavorited on Hype Machine'];
   } else {
-    args = ['./2764.png', 'Favorited on Hype Machine'];
+    args = [icon(relative('assets', 'heart.png')), 'Favorited on Hype Machine'];
   }
   meta.favStatus = !meta.favStatus;
   args.push(`${meta.artist} - ${meta.song}`);
