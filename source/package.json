@@ -1,0 +1,14 @@
+{
+  "name": "electrohype",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jean-Charles Sisk <jeancharles@paypal.com>",
+  "license": "ISC",
+  "dependencies": {
+    "menubar": "^2.2.1"
+  }
+}

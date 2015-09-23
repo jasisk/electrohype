@@ -1,0 +1,86 @@
+#header-inner > .menu,
+#search-form,
+#player-nowplaying > .share-icons,
+#menu-friends,
+#phonograph,
+#container > .ad-breakout,
+#message-intro-new,
+#content-right,
+#message,
+#nav-videos,
+#nav-twitter,
+#submenu,
+.wb-hypem-ad-grid-title,
+.wb-hypem-ad-grid-title + div,
+.paginator.infinite,
+#ad-leaderboard,
+.ad-remove,
+.ad-report,
+.section .share-links,
+#end-of-infinity,
+#footer-menu,
+#footer
+{
+  display: none !important;
+}
+
+#logo-txt {
+  padding: 0 10px !important;
+}
+
+/* unnecessary while fixed header
+#player-container.stick #player-controls,
+#logo-txt {
+  padding-left: 78px;
+}
+
+#player-container.stick #player-controls {
+  box-sizing: border-box;
+}
+
+
+#player-container.stick #player-nowplaying {
+  width: 403px !important;
+}
+*/
+
+#content-left,
+.content-centered {
+  width: auto !important;
+}
+#content-left {
+  margin-right: 0 !important;
+}
+
+#container:not(:first-of-type) .section.first {
+  border-top: 1px solid #999999 !important;
+}
+
+#content {
+  padding: 0 !important;
+}
+
+.section {
+  padding-right: 10px !important;
+}
+
+#content-wrapper {
+  margin-top: 75px !important;
+}
+
+#header {
+  position: fixed !important;
+  width: 100%;
+  top: 0;
+}
+
+#player-container {
+  position: fixed !important;
+  top: 42px !important;
+  z-index: 300px;
+}
+/* unnecessary when hiding submenu
+#track-list {
+  padding-top: 10px;
+}
+*/
