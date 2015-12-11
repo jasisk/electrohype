@@ -5,6 +5,7 @@ let BrowserWindow = require('browser-window');
 let dialog = require('dialog');
 let shell = require('shell');
 let path = require('path');
+let menu = require('menu');
 let app = require('app');
 let ipc = require('ipc');
 let fs = require('fs');
@@ -27,6 +28,25 @@ const mb = menubar({
 mb.on('ready', function () {
   let _meta;
   let _status;
+	let contextMenu = menu.buildFromTemplate([
+    { label: 'Next Track', acceletator: 'MediaNextTrack', click: function() { mb.window.webContents.send('next-track'); } },
+    { label: 'Play/Pause', acceletator: 'MediaPlayPause', click: function() { mb.window.webContents.send('playpause'); } },
+    { label: 'Previous Track', acceletator: 'MediaPreviousTrack', click: function() { mb.window.webContents.send('previous-track'); } },
+		{ type: 'separator' },
+		{ label: 'Favorite', accelerator: 'Ctrl+Alt+Cmd+F', click: function() { mb.window.webContents.send('favorite'); } },
+		{ type: 'separator' },
+		{ label: 'Quit', accelerator: 'Command+Q', click: function () {
+			dialog.showMessageBox(null, {
+				type: 'question',
+				buttons: ['Don\'t Quit', 'Quit'],
+				message: 'Are you sure you want to quit?'
+			}, function (idx) {
+				if (idx === 1) {
+					mb.app.quit();
+				}
+			});
+		}}
+	]);
   function setImage() {
     if (_status === undefined || _meta === undefined) { return; }
     let status = (_status === 'PLAYING') ? 'play' : 'pause';
@@ -44,15 +64,7 @@ mb.on('ready', function () {
     setImage();
   });
   mb.tray.on('right-clicked', function () {
-    dialog.showMessageBox(null, {
-      type: 'question',
-      buttons: ['Don\'t Quit', 'Quit'],
-      message: 'Are you sure you want to quit?'
-    }, function (idx) {
-      if (idx === 1) {
-        mb.app.quit();
-      }
-    });
+		mb.tray.popUpContextMenu(contextMenu);
   });
 });
 
